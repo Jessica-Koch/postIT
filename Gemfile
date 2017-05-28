@@ -32,6 +32,8 @@ gem 'jquery-rails'
 gem 'coffee-rails', '~> 4.2'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'bootstrap-sass'
+
 # gem 'redis', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 
