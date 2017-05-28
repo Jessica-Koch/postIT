@@ -13,13 +13,17 @@ group :production do
   gem 'rails_12factor'
 end
 
+group :development do
+    gem 'web-console', '>= 3.3.0'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'web-console', '>= 3.3.0'
   gem 'sqlite3'
+  gem 'rails-controller-testing'
+  gem 'rspec-rails', '~> 3.0'
 end
-
 
 gem 'listen', '>= 3.0.5', '< 3.2'
 gem 'sass-rails', '~> 5.0'
