@@ -1,27 +1,3 @@
-
-@mixin center {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-}
-#about{
-    
-    .social-btn {
-        border: 2px solid #F94F83;
-        color: #F94F83;
-        background: transparentize(#F94F83, 1);
-        padding: 12px 35px;
-        transition: all 0.3s linear;
-        border-radius: 20px;
-        cursor: pointer;
-        &:hover {
-            text-decoration: none;
-            transition: all 0.3s linear 0.3s;
-            background: transparentize(#F94F83, 0);
-            color: #fff;
-        }
-    }
-}
+// Place all the styles related to the welcome controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
