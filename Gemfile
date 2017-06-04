@@ -23,7 +23,8 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'sqlite3'
   gem 'rails-controller-testing'
-  gem 'rspec-rails', '~> 3.0'
+  gem 'rspec-rails', '~> 3.5'
+  gem 'rails-controller-testing'
 end
 
 gem 'listen', '>= 3.0.5', '< 3.2'
