@@ -39,7 +39,7 @@ RSpec.describe PostsController, type: :controller do
       end
 
       it "assigns the new post to @post" do
-            post :create, params: {post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}
+         post :create, params: {post: {title: RandomData.random_sentence, body: RandomData.random_paragraph}}
         expect(assigns(:post)).to eq Post.last
       end
 
