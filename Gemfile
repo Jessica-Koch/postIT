@@ -23,6 +23,7 @@ group :development, :test do
   gem 'sqlite3'
   gem 'pry-rails'
   gem 'rails-controller-testing'
+  gem 'faker'
   gem 'rspec-rails', '~> 3.5'
   gem 'rails-controller-testing'
 end

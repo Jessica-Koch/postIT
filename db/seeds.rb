@@ -2,8 +2,8 @@ require 'random_data'
 
 50.times do
     Post.create!(
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph
+        title: Faker::Hipster.words(3),
+        body: Faker::Hipster.paragraph(3, true, 1)
     )
 end
 
@@ -12,22 +12,22 @@ posts = Post.all
 100.times do
     Comment.create!(
         post: posts.sample,
-        body: RandomData.random_paragraph
+        body: Faker::Hipster.paragraph(3, true, 1)
     )
 end
 
 50.times do
     Advertisement.create!(
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph,
+        title: Faker::Hipster.words(3),
+        body: Faker::Hipster.paragraph(3, true, 1),
         price: 13
     )
 end
 
 150.times do
     Question.create!(
-        title: RandomData.random_sentence,
-        body: RandomData.random_paragraph,
+        title: Faker::Hipster.words(3),
+        body: Faker::Hipster.paragraph(3, true, 1),
         resolved: RandomData.random_boolean
     )
 end

@@ -4,6 +4,7 @@ RSpec.describe QuestionsController, type: :controller do
     let(:my_q) { Question.create!(title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean) }
 
     let(:q_attributes){{title: RandomData.random_sentence, body: RandomData.random_paragraph, resolved: RandomData.random_boolean }}
+
     describe "GET #index" do
         it "returns http success" do
             get :index
@@ -51,22 +52,17 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     describe "GET #create" do
-        it "returns http success" do
-            get :create
-            expect(response).to have_http_status(:success)
-        end
-
-        it "increases the number of Question by 1" do
+        it "increases the number of Questions by 1" do
             expect{post :create, params: {question: q_attributes}}.to change(Question, :count).by(1)
         end
 
         it "assigns the new question to @question" do
             post :create, params: {question: q_attributes}
-            expect(assigns(:post)).to eq Question.last
+            expect(assigns(:question)).to eq Question.last
         end
 
         it "redirects to the new question" do
-            post :create, params: {post: q_attributes}
+            post :create, params: {question: q_attributes}
             expect(response).to redirect_to Question.last
         end
     end
@@ -99,12 +95,12 @@ RSpec.describe QuestionsController, type: :controller do
             new_body = RandomData.random_paragraph
             new_resolution = RandomData.random_boolean
 
-            patch :update, params: {id: my_q.id, question:{title: new_title, body: new_body, resolved: new_resolution}}
+            put :update, params: {id: my_q.id, question:{title: new_title, body: new_body, resolved: new_resolution}}
             updated_question = assigns(:question)
             expect(updated_question.id).to eq my_q.id
-            expect(updated_question.title).to eq my_q.title
-            expect(updated_question.body).to eq my_q.body
-            expect(updated_question.resolved).to eq my_q.resolved
+            expect(updated_question.title).to eq new_title
+            expect(updated_question.body).to eq new_body
+            expect(updated_question.resolved).to eq new_resolution
         end
 
         it "redirects to the updated question" do
@@ -118,11 +114,6 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     describe "GET #destroy" do
-        it "returns http success" do
-            get :destroy
-            expect(response).to have_http_status(:success)
-        end
-
         it "deletes the question" do
             delete :destroy, params: {id: my_q.id}
 
