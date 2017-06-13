@@ -74,7 +74,7 @@ RSpec.describe PostsController, type: :controller do
            expect(response).to have_http_status(:success)
        end
 
-      it "renders teh #edit view" do
+      it "renders the #edit view" do
          get :edit, params:{id: my_post.id}
          expect(response).to render_template :edit
       end
@@ -91,7 +91,7 @@ RSpec.describe PostsController, type: :controller do
 
    describe "PUT update" do
        it "updates post with expected attributes" do
-             new_title = RandomData.random_sentence
+            new_title = RandomData.random_sentence
              new_body = RandomData.random_paragraph
              patch :update, params: {id: my_post.id, post: {title: new_title, body: new_body}}
              updated_post = assigns(:post)
