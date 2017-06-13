@@ -90,45 +90,21 @@ RSpec.describe PostsController, type: :controller do
    end
 
    describe "PUT update" do
-
-        # it "updates post with expected attributes" do
-        #
-        #     patch :update, params:{id: my_post.id}
-        #
-        #     updated_post = assigns(:post)
-        #
-        #     expect(updated_post.id).to eq my_post.id
-        #     #    expect(updated_post.title).to eq new_title
-        #     #    expect(updated_post.body).to eq new_body
-        # end
-
-        # it "2" do
-        #     new_title = RandomData.random_sentence
-        #     new_body = RandomData.random_paragraph
-        #     n_post =  Post.create! {title: 'new_title', body: 'old body' }
-        #
-        #     expect (
-        #         put post_path(my_post), params: {
-        #             post: {
-        #                 title: new_title,
-        #                 body: new_body
-        #             }
-        #         }
-        #         post.reload
-        #     ).to change { post.title }.to eq new_title
-        # end
+       it "updates post with expected attributes" do
+             new_title = RandomData.random_sentence
+             new_body = RandomData.random_paragraph
+             patch :update, params: {id: my_post.id, post: {title: new_title, body: new_body}}
+             updated_post = assigns(:post)
+             expect(updated_post.id).to eq my_post.id
+             expect(updated_post.title).to eq new_title
+             expect(updated_post.body).to eq new_body
+           end
 
         it "redirects to the updated post" do
             new_title = RandomData.random_sentence
             new_body = RandomData.random_paragraph
-            binding.pry
-            put :update, params: { id: my_post.id, 
-                post: {
-                    title: new_title,
-                    body: new_body
-                    }
-                }
-            # put post_path(my_post), params:{ post: {title: new_title, body: new_body}}
+
+            put :update, params: {id: my_post.id, post: {title: new_title, body: new_body}}
             expect(response).to redirect_to my_post
         end
     end
