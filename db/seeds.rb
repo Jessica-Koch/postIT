@@ -1,8 +1,17 @@
 require 'random_data'
 
+15.times do
+        Topic.create!(
+        name: Faker::Hipster.word,
+        description: Faker::Hipster.paragraph(3)
+        )
+end
+topics = Topic.all
+
 50.times do
     Post.create!(
-        title: Faker::Hipster.words(3),
+        topic:  topics.sample,
+        title: Faker::Hipster.sentence(1),
         body: Faker::Hipster.paragraph(3, true, 1)
     )
 end
@@ -18,7 +27,7 @@ end
 
 50.times do
     Advertisement.create!(
-        title: Faker::Hipster.words(3),
+        title: Faker::Hipster.sentence(1),
         body: Faker::Hipster.paragraph(3, true, 1),
         price: 13
     )
@@ -26,7 +35,7 @@ end
 
 150.times do
     Question.create!(
-        title: Faker::Hipster.words(3),
+        title: Faker::Hipster.sentence(1),
         body: Faker::Hipster.paragraph(3, true, 1),
         resolved: RandomData.random_boolean
     )
@@ -34,6 +43,7 @@ end
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
+puts "#{Topic.count} topics created"
 puts "#{Comment.count} comments created"
 puts "#{Advertisement.count} advertisements created"
 puts "#{Question.count} questions created"

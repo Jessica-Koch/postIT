@@ -24,6 +24,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rails-controller-testing'
   gem 'faker'
+  gem 'shoulda'
   gem 'rspec-rails', '~> 3.5'
   gem 'rails-controller-testing'
 end
