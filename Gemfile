@@ -1,32 +1,32 @@
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
+    repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+    "https://github.com/#{repo_name}.git"
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 
 group :production do
-  gem 'pg'
-  gem 'rails_12factor'
+    gem 'rails_12factor'
 end
 
 group :development do
     gem 'web-console', '>= 3.3.0'
+    gem 'pg'
 end
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'sqlite3'
-  gem 'pry-rails'
-  gem 'rails-controller-testing'
-  gem 'faker'
-  gem 'shoulda'
-  gem 'rspec-rails', '~> 3.5'
-  gem 'rails-controller-testing'
+    # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+    gem 'sqlite3'
+    gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+    gem 'pry-rails'
+    gem 'rails-controller-testing'
+    gem 'faker'
+    gem 'shoulda'
+    gem 'rspec-rails', '~> 3.5'
+    gem 'rails-controller-testing'
 end
 
 gem 'listen', '>= 3.0.5', '< 3.2'

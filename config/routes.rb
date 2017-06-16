@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
+    get 'sponsored_posts/show'
+
+    get 'sponsored_posts/new'
+
+    get 'sponsored_posts/edit'
+
     resources :topics do
         resources :posts, except: [:index]
     end
-    resources :questions
-    resources :advertisements
+
+    resources :topics do
+        resources :sponsored_posts, except: [:index]
+    end
+        resources :questions
 
     get 'about' => 'welcome#about'
 
@@ -14,5 +23,5 @@ Rails.application.routes.draw do
 
 
     root 'welcome#index'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
