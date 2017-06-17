@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'pry'
 
 RSpec.describe PostsController, type: :controller do
-    let(:my_topic) { Topic.create!(name: Faker::Hipster.word, description: Faker::Hipster.paragraph(3) )}
+    let(:my_topic) { Topic.create!(name: Faker::Hipster.sentence(2), description: Faker::Hipster.paragraph(3) )}
 
     let(:my_post) { my_topic.posts.create!(title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1)) }
 

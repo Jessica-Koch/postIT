@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe TopicsController, type: :controller do
-    let(:my_topic) { Topic.create!(name: Faker::Hipster.word,        description: Faker::Hipster.paragraph(3) )}
+    let(:my_topic) { Topic.create!(name: Faker::Hipster.sentence(2),        description: Faker::Hipster.paragraph(3) )}
 
     describe "GET index" do
         it "returns http success" do
@@ -53,95 +53,95 @@ RSpec.describe TopicsController, type: :controller do
         it "increases the number of topics by 1" do
             expect{ post :create, params: {
                 topic: {
-                    name: Faker::Hipster.word,
-                    description: Faker::Hipster.paragraph(3)}
-                    }
-                }.to change(Topic, :count).by(1)
-        end
-
-        it "assigns Topic.last to @topic" do
-            post :create, params: {
-                topic: {
-                    name: Faker::Hipster.word,
-                    description: Faker::Hipster.paragraph(3)
-                }
+                    name: Faker::Hipster.sentence(2),
+                description: Faker::Hipster.paragraph(3)}
             }
-            expect(assigns(:topic)).to eq Topic.last
-        end
-
-        it "redirects to the new topic" do
-            post :create, params: {
-                topic: {
-                    name: Faker::Hipster.word,
-                    description: Faker::Hipster.paragraph(3)
-                }
-            }
-            expect(response).to redirect_to Topic.last
-        end
+        }.to change(Topic, :count).by(1)
     end
 
-    describe "GET edit" do
-        it "returns http success" do
-            get :edit, params:{id: my_topic.id}
-            expect(response).to have_http_status(:success)
-        end
-
-        it "renders the #edit view" do
-            get :edit, params:{id: my_topic.id}
-            expect(response).to render_template :edit
-        end
-
-        it "assigns topic to be updated to @topic" do
-            get :edit, params:{id: my_topic.id}
-            topic_instance = assigns(:topic)
-
-            expect(topic_instance.id).to eq my_topic.id
-            expect(topic_instance.name).to eq my_topic.name
-            expect(topic_instance.description).to eq my_topic.description
-        end
-    end
-
-    describe "PATCH update" do
-        it "updates topic with expected attributes" do
-            new_name = Faker::Hipster.word
-            new_description = Faker::Hipster.paragraph(3)
-
-            patch :update, params: {id: my_topic.id, topic:{
-                name: new_name,
-                description: new_description
-                }
+    it "assigns Topic.last to @topic" do
+        post :create, params: {
+            topic: {
+                name: Faker::Hipster.sentence(2),
+                description: Faker::Hipster.paragraph(3)
             }
+        }
+        expect(assigns(:topic)).to eq Topic.last
+    end
 
-            updated_topic = assigns(:topic)
-            expect(updated_topic.id).to eq my_topic.id
-            expect(updated_topic.name).to eq new_name
-            expect(updated_topic.description).to eq new_description
-        end
-
-        it "redirects to the updated topic" do
-            new_name = Faker::Hipster.word
-            new_description = Faker::Hipster.paragraph(3)
-
-            patch :update, params: {id: my_topic.id, topic: {
-                name: new_name,
-                description: new_description
-                }
+    it "redirects to the new topic" do
+        post :create, params: {
+            topic: {
+                name: Faker::Hipster.sentence(2),
+                description: Faker::Hipster.paragraph(3)
             }
-            expect(response).to redirect_to my_topic
-        end
+        }
+        expect(response).to redirect_to Topic.last
+    end
+end
+
+describe "GET edit" do
+    it "returns http success" do
+        get :edit, params:{id: my_topic.id}
+        expect(response).to have_http_status(:success)
     end
 
-    describe "DELETE destroy" do
-        it "deletes the topic" do
-            delete :destroy, params: {id: my_topic.id}
-
-            count = Post.where({id: my_topic.id}).size
-            expect(count).to eq 0
-        end
-
-        it "redirects to topics index" do
-            delete :destroy, params: {id: my_topic.id}
-            expect(response).to redirect_to topics_path
-        end
+    it "renders the #edit view" do
+        get :edit, params:{id: my_topic.id}
+        expect(response).to render_template :edit
     end
+
+    it "assigns topic to be updated to @topic" do
+        get :edit, params:{id: my_topic.id}
+        topic_instance = assigns(:topic)
+
+        expect(topic_instance.id).to eq my_topic.id
+        expect(topic_instance.name).to eq my_topic.name
+        expect(topic_instance.description).to eq my_topic.description
+    end
+end
+
+describe "PATCH update" do
+    it "updates topic with expected attributes" do
+        new_name = Faker::Hipster.sentence(2)
+        new_description = Faker::Hipster.paragraph(3)
+
+        patch :update, params: {id: my_topic.id, topic:{
+            name: new_name,
+            description: new_description
+        }
+    }
+
+    updated_topic = assigns(:topic)
+    expect(updated_topic.id).to eq my_topic.id
+    expect(updated_topic.name).to eq new_name
+    expect(updated_topic.description).to eq new_description
+end
+
+it "redirects to the updated topic" do
+    new_name = Faker::Hipster.sentence(2)
+    new_description = Faker::Hipster.paragraph(3)
+
+    patch :update, params: {id: my_topic.id, topic: {
+        name: new_name,
+        description: new_description
+    }
+}
+expect(response).to redirect_to my_topic
+end
+end
+
+describe "DELETE destroy" do
+    it "deletes the topic" do
+        delete :destroy, params: {id: my_topic.id}
+
+        count = Post.where({id: my_topic.id}).size
+        expect(count).to eq 0
+    end
+
+    it "redirects to topics index" do
+        delete :destroy, params: {id: my_topic.id}
+        expect(response).to redirect_to topics_path
+    end
+end
 end

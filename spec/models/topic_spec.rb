@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Topic, type: :model do
-    let(:name) {Faker::Hipster.sentence}
+    let(:name) {Faker::Hipster.sentence(2)}
     let(:description) {Faker::Hipster.paragraph}
     let(:public) {true}
     let(:topic) { Topic.create!(name: name, description: description) }

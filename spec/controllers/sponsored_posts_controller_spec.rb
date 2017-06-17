@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe SponsoredPostsController, type: :controller do
     num = Random.new
     ran_num = num.rand(100)
-    let(:my_topic) { Topic.create!(name: Faker::Hipster.word, description: Faker::Hipster.paragraph(3))}
-    let(:my_sp_post) {my_topic.sponsored_posts.create!(title: Faker::Hipster.sentence(1), body: Faker::Hipster.paragraph(1), price: ran_num)}
+    let(:my_topic) { Topic.create!(name: Faker::Hipster.sentence(2), description: Faker::Hipster.paragraph(3))}
+    let(:my_sp_post) {my_topic.sponsored_posts.create!(title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1), price: ran_num)}
 
     describe "GET #show" do
         it "returns http success" do
@@ -43,17 +43,17 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     describe "POST #create" do
         it "increases the number of SponsoredPost by 1" do
-            expect{post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(1), body: Faker::Hipster.paragraph(1), price: ran_num}}, as: :json}.to change(SponsoredPost,:count).by(1)
+            expect{post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1), price: ran_num}}, as: :json}.to change(SponsoredPost,:count).by(1)
 
         end
 
         it "assigns the new post to @post" do
-            post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(1), body: Faker::Hipster.paragraph(1), price: ran_num}}
+            post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1), price: ran_num}}
             expect(assigns(:sponsored_post)).to eq SponsoredPost.last
         end
 
         it "redirects to the new post" do
-            post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(1), body: Faker::Hipster.paragraph(1), price: ran_num}}
+            post :create, params: {topic_id: my_topic.id, sponsored_post: {title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1), price: ran_num}}
             expect(response).to redirect_to [my_topic, SponsoredPost.last]
         end
     end
@@ -82,7 +82,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
 
     describe "PATCH #update" do
         it "updates sponsored post with expected attributes" do
-            new_title = Faker::Hipster.word
+            new_title = Faker::Hipster.sentence(2)
             new_body = Faker::Hipster.paragraph(1)
             new_price = ran_num
             patch :update, params: {topic_id: my_topic.id, id: my_sp_post.id, sponsored_post: {title: new_title, body: new_body, price: new_price}}
@@ -95,7 +95,7 @@ RSpec.describe SponsoredPostsController, type: :controller do
         end
 
         it "redirects to the updated post" do
-            new_title = Faker::Hipster.word
+            new_title = Faker::Hipster.sentence(2)
             new_body = Faker::Hipster.paragraph(1)
             new_price = ran_num
 
