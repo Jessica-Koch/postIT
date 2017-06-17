@@ -3,6 +3,8 @@ Rails.application.routes.draw do
         resources :posts, except: [:index]
     end
 
+    resources :users
+
     resources :topics do
         resources :sponsored_posts, except: [:index]
     end
