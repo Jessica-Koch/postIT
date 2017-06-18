@@ -1,10 +1,10 @@
 require 'random_data'
 
 15.times do
-        Topic.create!(
-        name: Faker::Hipster.word,
+    Topic.create!(
+        name: Faker::Hipster.sentence(2),
         description: Faker::Hipster.paragraph(3)
-        )
+    )
 end
 topics = Topic.all
 
