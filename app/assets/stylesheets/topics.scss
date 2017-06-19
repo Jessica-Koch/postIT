@@ -1,0 +1,10 @@
+$lavender: #D2ADD5;
+.media {
+    padding: 25px;
+    .media-heading a {
+        font-family: 'Josefin Slab', serif;
+        cursor: pointer;
+        text-decoration: none!important;
+        color: $lavender;
+    }
+}

@@ -14,14 +14,70 @@
  *= require_self
  */
 @import "bootstrap";
+$success: #2ECDBA;
+$dark-navy: #25266C;
+$gray-blue: #3B5B93;
+$gray-purple: #7D799B;
+$light-pink: #EC7A90;
+$pink: #F94F83;
+$primary: #6BE6DF;
+$lavender: #D2ADD5;
 
  html, body {
    height: 100%;
    width: 100%;
    margin: 0;
    padding: 0;
- }
+   background-image: url('https://static.pexels.com/photos/245618/pexels-photo-245618.jpeg');
+   background-color: $dark-navy;
+   background-position: center;
+   background-size: cover;
 
+ }
+p, a {
+     font-family: 'Work Sans', sans-serif;
+     font-weight: 300;
+    letter-spacing: .05em;
+ }
+nav {
+    background-color: transparent;
+    color: $lavender;
+}
+h1, h2, h3, h4, h5 {
+    // font-family: 'Nixie One', cursive;
+    font-family: 'Josefin Slab', serif;
+
+    text-transform: uppercase;
+}
+// Overrides
+.btn-primary{
+    background-color: $primary;
+    border-color: $primary;
+}
+
+.btn-success {
+    background-color: $success;
+    border-color: $success;
+}
+.btn-success:hover {
+    background-color: darken($success, 10%);
+    border-color: darken($success, 10%);
+}
+.btn-success:hover {
+    background-color: darken($success, 10%);
+    border-color: darken($success, 10%);
+}
+.navbar-brand, a.nav-link {
+    color: $lavender!important;
+    text-decoration: none;
+}
+.container.margin-bottom-5 {
+    background-color: rgba(0, 0, 0, .4)!important;
+}
+
+.container.margin-bottom-5{
+    color:  $lavender;
+}
 .user-info {
     margin-top: 9px;
 }
