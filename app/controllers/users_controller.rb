@@ -12,7 +12,7 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new
+        @user = User.new 
         @user.name = user_params[:name]
         @user.email = user_params[:email]
         @user.password = user_params[:password]
