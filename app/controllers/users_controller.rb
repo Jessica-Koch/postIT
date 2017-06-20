@@ -12,11 +12,8 @@ class UsersController < ApplicationController
     end
 
     def create
-        @user = User.new 
-        @user.name = user_params[:name]
-        @user.email = user_params[:email]
-        @user.password = user_params[:password]
-        @user.password_confirmation = user_params[:password_confirmation]
+        @user = User.new(user_params)
+
         if @user.save
             flash[:notice] = "Welcome to PostIt #{@user.name}"
             redirect_to root_path
@@ -29,7 +26,7 @@ class UsersController < ApplicationController
 
     private
     def user_params
-        params.require(:user).permit(:name, :email, :password, :password_confirmation)
+        params.require(:user).permit(:name, :email, :password, :password_confirmation, :password_digest)
     end
 
 
