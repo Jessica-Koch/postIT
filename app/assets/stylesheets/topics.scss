@@ -1,10 +1,39 @@
+$success: #2ECDBA;
+$dark-navy: #25266C;
+$gray-blue: #3B5B93;
+$gray-purple: #7D799B;
+$pink: #EC7A90;
+$pink: #F94F83;
+$primary: #6BE6DF;
 $lavender: #D2ADD5;
+
 .media {
-    padding: 25px;
+    padding-bottom: 25px;
     .media-heading a {
         font-family: 'Josefin Slab', serif;
         cursor: pointer;
         text-decoration: none!important;
         color: $lavender;
+    }
+}
+.paginator {
+    width: 100%;
+    .pagination {
+        display: flex;
+        justify-content: space-around;
+        .page {
+            a{
+
+                color: $gray-blue;
+            }
+        }
+        .page.active {
+            border: 2px solid $pink;
+            padding: 5px 13px;
+            border-radius: 35px;
+            a{
+                color: $pink;
+            }
+        }
     }
 }
