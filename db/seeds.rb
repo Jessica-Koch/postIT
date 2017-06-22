@@ -8,8 +8,18 @@ require 'random_data'
 end
 topics = Topic.all
 
+5.times do
+    User.create!(
+        name: Faker::Name.name,
+        email: Faker::Internet.email,
+        password_digest: Faker::Internet.password(8)
+    )
+end
+users = User.all
+
 50.times do
     Post.create!(
+        user: users.sample,
         topic:  topics.sample,
         title: Faker::Hipster.sentence(2),
         body: Faker::Hipster.paragraph(3, true, 1)
@@ -17,14 +27,6 @@ topics = Topic.all
 end
 posts = Post.all
 
-10.times do
-    User.create(
-        name: Faker::Name.name,
-        email: Faker::Internet.email,
-        password_digest: Faker::Internet.password(8)
-    )
-end
-users = User.all
 
 25.times do
     SponsoredPost.create!(
@@ -51,6 +53,12 @@ end
         resolved: RandomData.random_boolean
     )
 end
+
+user = User.first
+user.update_attributes!(
+    email: 'jessicakoch136@icloud.com',
+    password: 'llllll'
+)
 
 puts "Seed finished"
 puts "#{Post.count} posts created"
