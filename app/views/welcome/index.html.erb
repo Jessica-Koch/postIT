@@ -3,7 +3,6 @@
    <h1>PostIt</h1>
    <p>PostIt is a resource for sharing links with your friends!</p>
     <p>
-        <%= link_to 'Sign In', new_session_path %> or
         <% if current_user %>
             <%= current_user.name %> <%= link_to 'Sign Out', sesson_path(current_user), method: :delete %>
         <% else %>
