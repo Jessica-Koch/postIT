@@ -2,9 +2,15 @@
  <div class="jumbotron">
    <h1>PostIt</h1>
    <p>PostIt is a resource for sharing links with your friends!</p>
-   <p>
-     <%= link_to "Sign Up", new_user_path, class: 'btn btn-primary' %> today!
-   </p>
+    <p>
+        <%= link_to 'Sign In', new_session_path %> or
+        <% if current_user %>
+            <%= current_user.name %> <%= link_to 'Sign Out', sesson_path(current_user), method: :delete %>
+        <% else %>
+            <%= link_to 'Sign In', new_session_path %> or
+            <%= link_to 'Sign Up', new_user_path %>
+        <% end %>
+    </p>
  </div>
 
  <div class="row">

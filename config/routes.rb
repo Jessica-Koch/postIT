@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :questions
 
+    resources :sessions, only: [:new, :create, :destroy]
     get 'about' => 'welcome#about'
 
     get 'contact' => 'welcome#contact'
