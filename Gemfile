@@ -10,6 +10,7 @@ gem 'rails', '~> 5.1.1'
 
 group :production do
     gem 'rails_12factor'
+    gem 'pg'
 end
 
 group :development do
