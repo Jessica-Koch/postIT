@@ -54,9 +54,16 @@ end
     )
 end
 
-user = User.first
-user.update_attributes!(
-    email: 'jessicakoch136@icloud.com',
+admin = User.create!(
+    name: 'Admin',
+    email: 'admin@test.com',
+    password: 'llllll',
+    role: 'admin'
+)
+
+member = User.create!(
+    name: 'Member User',
+    email: 'member@test.com',
     password: 'llllll'
 )
 
