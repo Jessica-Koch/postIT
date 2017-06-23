@@ -1,5 +1,7 @@
 class PostsController < ApplicationController
     before_action :require_sign_in, except: :show
+    before_action :authorize_user, except: [:show, :new, :create]
+    before_action :user_can_delete, only: [:destroy]
     def show
         @post = Post.find(params[:id])
     end
@@ -52,7 +54,26 @@ class PostsController < ApplicationController
         end
     end
 
+    private
     def post_params
         params.require(:post).permit(:title, :body)
+    end
+
+    def user_can_delete
+        post = Post.find(params[:id])
+
+        unless current_user == post.user ||current_user.admin?
+            flash[:alert] = 'You don\'t have permission to do that.'
+            redirect_to [post.topic, post]
+        end
+    end
+
+    def authorize_user
+        post = Post.find(params[:id])
+
+        unless current_user == post.user ||(current_user.admin? || current_user.moderator?)
+            flash[:alert] = 'You don\'t have permission to do that.'
+            redirect_to [post.topic, post]
+        end
     end
 end

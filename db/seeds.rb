@@ -32,7 +32,7 @@ posts = Post.all
     SponsoredPost.create!(
         topic: topics.sample,
         title: Faker::Hipster.sentence(2),
-        body: Faker::Hipster.paragraph(1),
+        body: Faker::Hipster.paragraph(2),
         price: Faker::Commerce.price
     )
 end
@@ -64,6 +64,12 @@ admin = User.create!(
 member = User.create!(
     name: 'Member User',
     email: 'member@test.com',
+    password: 'llllll'
+)
+
+moderator = User.create!(
+    name: 'Moderator User',
+    email: 'moderator@test.com',
     password: 'llllll'
 )
 
