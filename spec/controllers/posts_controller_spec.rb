@@ -5,7 +5,7 @@ RSpec.describe PostsController, type: :controller do
     let(:my_topic) { Topic.create!(name: Faker::Hipster.sentence(2), description: Faker::Hipster.paragraph(3) )}
     let(:my_user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
     let(:other_user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password, role: :member)}
-    let(:my_post) { my_topic.posts.create!(title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(1), user: my_user) }
+    let(:my_post) { my_topic.posts.create!(title: Faker::Hipster.sentence(2), body: Faker::Hipster.paragraph(2), user: my_user) }
 
     context "guest user" do
         describe "GET show" do

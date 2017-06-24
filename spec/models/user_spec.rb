@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
 
     let(:user) { User.create!(name: "PostIt User", email: "user@postit.com", password: "password") }
 
+    it {is_expected.to have_many(:comments)}
     it {is_expected.to have_many(:posts)}
     # Shoulda tests for name
     it {is_expected.to validate_presence_of(:name)}
