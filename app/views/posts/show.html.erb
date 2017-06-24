@@ -18,7 +18,7 @@
         <% end %>
     </div>
     <div class="col-md-4">
-    <% if user_is_authorized_for_post(@post) %>
+    <% if user_is_authorized_for_post?(@post) %>
         <%= link_to "Edit", edit_topic_post_path(@post.topic, @post), class: 'btn btn-success' %>
     <% end %>
     <% if user_can_delete?(@post) %>
