@@ -22,3 +22,5 @@
 
 .byebug_history
 .coveralls.yml
+
+/node_modules
