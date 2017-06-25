@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'pry'
 RSpec.describe Post, type: :model do
     let(:name) {Faker::Hipster.sentence(3)}
     let(:description) {Faker::Hipster.paragraph}
@@ -21,6 +21,7 @@ RSpec.describe Post, type: :model do
 
     it {is_expected.to validate_length_of(:title).is_at_least(5)}
     it { is_expected.to validate_length_of(:body).is_at_least(20) }
+
     describe "attributes" do
         it "has a title, body and user attributes" do
             expect(post).to have_attributes(title: title, body: body, user: user)
@@ -28,10 +29,10 @@ RSpec.describe Post, type: :model do
     end
 
     describe "voting" do
-
+        # using new instead of create initializes item instead of creating it; creating it will fail because user needs to be present
         before do
-            3.times { post.votes.create!(value: 1) }
-            2.times { post.votes.create!(value: -1) }
+            3.times { post.votes.new(value: 1) }
+            2.times { post.votes.new(value: -1) }
             @up_votes = post.votes.where(value: 1).count
             @down_votes = post.votes.where(value: -1).count
         end
@@ -59,6 +60,28 @@ RSpec.describe Post, type: :model do
         describe "#points" do
             it "returns the sum of all down and up votes" do
                 expect( post.points ).to eq(@up_votes - @down_votes)
+            end
+        end
+
+        describe "#update_rank" do
+            it "calculates the correct rank" do
+                post.update_rank
+                expect(post.rank).to eq (post.points + (post.created_at - Time.new(1970,1,1)) / 1.day.seconds)
+            end
+
+            it "updates the rank when an up vote is created" do
+                post.update_rank
+                old_rank = post.rank
+                post.votes.create!(value: 1, user: user)
+                expect(post.rank).to eq (old_rank + 1)
+            end
+
+            it "updates the rank when a down vote is created" do
+                post.update_rank
+
+                old_rank = post.rank
+                post.votes.create!(value: -1, user: user)
+                expect(post.rank).to eq (old_rank - 1)
             end
         end
     end

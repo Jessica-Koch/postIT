@@ -9,8 +9,18 @@
     <div class="col-md-8">
         <p class="lead"><%= @topic.description %></p>
 
-        <% render @topic.posts %>
+        <% @topic.posts.each do |post| %>
+        <div class="media">
+            <%= render partial: 'votes/voter', locals: { post: post } %>
 
+            <div class="media-body">
+                <h4 class="media-heading">
+                    <%= link_to @topic.name, @topic %>
+                </h4>
+                <small><%= @topic.description %></small>
+            </div>
+        </div>
+        <% end %>
     </div>
     <div class="col-md-4">
         <% if current_user %>

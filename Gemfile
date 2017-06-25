@@ -41,7 +41,6 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap', '~> 4.0.0.alpha3'
 gem 'coveralls', require: false
 
-
 # gem 'redis', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 

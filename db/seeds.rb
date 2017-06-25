@@ -18,18 +18,23 @@ end
 users = User.all
 
 50.times do
-    post = Post.create!(
+    Post.create!(
         user: users.sample,
         topic:  topics.sample,
         title: Faker::Hipster.sentence(2),
         body: Faker::Hipster.paragraph(3, true, 1)
     )
 end
-
-post.update_attributes(:created_at, rand(10.minutes .. 1.year).ago)
-rand(1..5).times {post.votes.create!(value: [-1, 1].sample, user: users.sample)}
 posts = Post.all
 
+150.times do
+    Vote.create!(
+        value: [-1, 1].sample,
+        user: users.sample,
+        post: posts.sample
+    )
+end
+votes = Vote.all
 
 25.times do
     SponsoredPost.create!(
