@@ -1,4 +1,5 @@
 # README
+[![Coverage Status](https://coveralls.io/repos/github/Jessica-Koch/postIT/badge.svg?branch=master)](https://coveralls.io/github/Jessica-Koch/postIT?branch=master)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
