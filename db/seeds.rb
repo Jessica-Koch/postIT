@@ -18,13 +18,16 @@ end
 users = User.all
 
 50.times do
-    Post.create!(
+    post = Post.create!(
         user: users.sample,
         topic:  topics.sample,
         title: Faker::Hipster.sentence(2),
         body: Faker::Hipster.paragraph(3, true, 1)
     )
 end
+
+post.update_attributes(:created_at, rand(10.minutes .. 1.year).ago)
+rand(1..5).times {post.votes.create!(value: [-1, 1].sample, user: users.sample)}
 posts = Post.all
 
 
@@ -81,3 +84,4 @@ puts "#{User.count} users created"
 puts "#{Comment.count} comments created"
 puts "#{SponsoredPost.count} sponsored posts created"
 puts "#{Question.count} questions created"
+puts "#{Vote.count} votes created"

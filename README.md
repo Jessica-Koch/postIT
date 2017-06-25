@@ -1,7 +1,8 @@
 # README
-[![Coverage Status](https://coveralls.io/repos/github/Jessica-Koch/postIT/badge.svg?branch=master)](https://coveralls.io/github/Jessica-Koch/postIT?branch=master)
-
+[![Coverage Status](https://coveralls.io/repos/github/Jessica-Koch/postIT/badge.svg)](https://coveralls.io/github/Jessica-Koch/postIT)
 [![Build Status](https://travis-ci.org/Jessica-Koch/postIT.svg?branch=master)](https://travis-ci.org/Jessica-Koch/postIT)
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
