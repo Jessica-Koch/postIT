@@ -29,7 +29,7 @@ group :development, :test do
     gem 'rspec-rails', '~> 3.5'
 
 end
-
+gem 'figaro', '1.0'
 gem 'kaminari'
 gem 'kaminari-bootstrap'
 gem 'listen', '>= 3.0.5', '< 3.2'
