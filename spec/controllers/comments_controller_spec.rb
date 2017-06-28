@@ -2,8 +2,8 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe CommentsController, type: :controller do
-# let(:name) {Faker::Hipster.sentence(3)}
-# let(:description) {Faker::Hipster.paragraph}
+    # let(:name) {Faker::Hipster.sentence(3)}
+    # let(:description) {Faker::Hipster.paragraph}
 
     let(:title) {Faker::Hipster.sentence(3)}
     let(:body) {Faker::Hipster.paragraph}
@@ -12,7 +12,7 @@ RSpec.describe CommentsController, type: :controller do
     let(:my_user) { create(:user) }
     let(:other_user) { create(:user) }
     let(:my_post) { create(:post, topic: my_topic, user: my_user) }
-    let(:my_comment){Comment.create!(body: body, post: my_post, user: my_user)}
+    let(:my_comment){create(:comment)}
 
     context "guest" do
         describe "POST create" do
