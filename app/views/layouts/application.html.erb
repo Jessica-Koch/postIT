@@ -28,7 +28,8 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
         <% if current_user %>
-            <%= current_user.name %><%= link_to 'Sign Out', session_path(current_user), method: :delete %>
+        <%= link_to current_user.name, user_path(current_user) %> <br/> <%= link_to "Sign Out", session_path(current_user), method: :delete %>
+
             <%= image_tag avatar_url(current_user), class:'avatar' %>
 
         <% else %>

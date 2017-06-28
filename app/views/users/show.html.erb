@@ -23,7 +23,17 @@
 
 
  <h2>Posts</h2>
+ <%= any_posts? %>
  <%= render @user.posts %>
 
  <h2>Comments</h2>
+ <%= any_comments? %>
  <%= render @user.comments %>
+
+ <h2>Favorites</h2>
+ <% @user.favorites.each do |fav| %>
+ <li>
+ <%= image_tag fav.post.user.avatar_url(128), class: 'media-object' %>
+ <span>Votes: <%= fav.post.votes.count %></span>
+ <span>Comments: <%= fav.post.comments.count %></span></li>
+ <% end %>
