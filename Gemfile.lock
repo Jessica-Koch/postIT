@@ -67,6 +67,11 @@ GEM
     docile (1.1.5)
     erubi (1.6.0)
     execjs (2.7.0)
+    factory_girl (4.8.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.8.0)
+      factory_girl (~> 4.8.0)
+      railties (>= 3.0.0)
     faker (1.7.3)
       i18n (~> 0.5)
     ffi (1.9.18)
@@ -231,6 +236,7 @@ DEPENDENCIES
   byebug
   coffee-rails (~> 4.2)
   coveralls
+  factory_girl_rails (~> 4.0)
   faker
   figaro (= 1.0)
   jbuilder (~> 2.5)

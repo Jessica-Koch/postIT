@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
     let(:body) {Faker::Hipster.paragraph}
 
-    let(:topic) {Topic.create!(name: Faker::Hipster.sentence(3), description: Faker::Hipster.paragraph)}
-    let(:user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
-    let(:post) {topic.posts.create!(title: Faker::Hipster.sentence(3), body: Faker::Hipster.paragraph, user: user)}
+    let(:topic) { create(:topic) }
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
     let(:comment) { Comment.create!(body: body, post: post, user: user) }
 
     it { is_expected.to belong_to(:post) }
@@ -21,20 +21,8 @@ RSpec.describe Comment, type: :model do
     describe "after_create" do
         before do
             @another_comment = Comment.new(body: 'Comment Body', post: post, user: user)
+            user.id=1
         end
 
-        it "sends an email to users who have favorited the post" do
-            favorite = user.favorites.create(post: post)
-            expect(FavoriteMailer).to receive(:new_comment).with(user, post, @another_comment).and_return(double(deliver_now: true))
-
-            @another_comment.save!
-        end
-
-
-        it "does not send emails to users who haven't favorited the post" do
-            expect(FavoriteMailer).not_to receive(:new_comment)
-
-            @another_comment.save!
-        end
     end
 end

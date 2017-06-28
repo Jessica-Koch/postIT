@@ -1,0 +1,7 @@
+New post to "<%= @post.title %>"
+ <%= "=" * (@post.title.length + 12) %>
+
+ You're following "<%= @post.title %>" you will be notified of all comments.  If you don't want to receive further notifications, unfavorite your <%= link_to 'post', topic_post_url(@post.topic, @post) %></h1>
+
+
+   <%= link_to "View Post on site", topic_post_url(@post.topic, @post) %>

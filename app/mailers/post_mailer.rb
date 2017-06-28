@@ -1,18 +1,14 @@
-class FavoriteMailer < ApplicationMailer
-    default from: "jessicakoch136@icloud.com"
-    def new_comment(user, post, comment)
-        headers["Message-ID"] = "<comments/#{comment.id}@your-app-name.example>"
+class PostMailer < ApplicationMailer
+    def new_post(post)
+        headers["Message-ID"] = "<posts/#{post.id}@your-app-name.example>"
         headers["In-Reply-To"] = "<post/#{post.id}@your-app-name.example>"
         headers["References"] = "<post/#{post.id}@your-app-name.example>"
 
-        @user = user
         @post = post
-        @comment = comment
+        mail(to: post.user.email, subject: "You're following #{post.title}")
 
-
-        mail(to: user.email, subject: "New comment on #{post.title}")
     end
-    def new_post(post)
+        def new_post(post)
         headers["Message-ID"] = "<posts/#{post.id}@your-app-name.example>"
         headers["In-Reply-To"] = "<post/#{post.id}@your-app-name.example>"
         headers["References"] = "<post/#{post.id}@your-app-name.example>"

@@ -27,8 +27,10 @@ group :development, :test do
     gem 'faker'
     gem 'shoulda'
     gem 'rspec-rails', '~> 3.5'
+    gem 'factory_girl_rails', '~> 4.0'
 
 end
+
 gem 'figaro', '1.0'
 gem 'kaminari'
 gem 'kaminari-bootstrap'

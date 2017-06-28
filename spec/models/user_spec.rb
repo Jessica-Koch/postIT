@@ -1,8 +1,8 @@
 require 'rails_helper'
+require 'pry'
 
 RSpec.describe User, type: :model do
-
-    let(:user) { User.create!(name: "PostIt User", email: "user@postit.com", password: "password") }
+    let(:user) { create(:user) }
 
     it {is_expected.to have_many(:comments)}
     it {is_expected.to have_many(:votes)}
@@ -23,8 +23,8 @@ RSpec.describe User, type: :model do
     it {is_expected.to validate_length_of(:password).is_at_least(6)}
 
     describe "invalid user" do
-        let(:user_with_invalid_name) {User.new(name: "", email: "user@postit.com")}
-        let(:user_with_invalid_email) {User.new(name: "PostIt User", email: "")}
+        let(:user_with_invalid_name) { build(:user, name: "") }
+        let(:user_with_invalid_email) { build(:user, email: "") }
 
         it "should be an invalid user due to blank name" do
             expect(user_with_invalid_name).not_to be_valid
@@ -38,7 +38,7 @@ RSpec.describe User, type: :model do
 
     describe "attributes" do
         it "should have name and email attributes" do
-            expect(user).to have_attributes(name: "PostIt User", email: "user@postit.com")
+            expect(user).to have_attributes(name: user.name, email: user.email)
         end
 
         it "responds to role" do
@@ -121,12 +121,23 @@ RSpec.describe User, type: :model do
         end
 
         it "returns 'nil' if the user has not favorited the post" do
+            user = create(:user)
             expect(user.favorite_for(@post)).to be_nil
         end
 
         it "returns the appropriate favorite if it exists" do
-            favorite = user.favorites.where(post: @post).create
-            expect(user.favorite_for(@post)).to eq(favorite)
+            fav = user.favorites.where(post: @post).create
+            fav.id= 1
+            expect(user.favorite_for(@post)).to eq(fav)
+        end
+    end
+
+    describe ".avatar_url" do
+        let(:known_user) {create(:user, email: 'postit@post.io')}
+
+        it "returns the proper Gravatar url for a known email entitity" do
+            expected_gravatar = "http://gravatar.com/avatar/8f8e552144a235540b25a90697a11f11.png?s=48"
+            expect(known_user.avatar_url(48)).to eq(expected_gravatar)
         end
     end
 end

@@ -1,15 +1,16 @@
 require 'rails_helper'
 include SessionsHelper
-
+require 'pry'
 RSpec.describe FavoritesController, type: :controller do
-    let(:my_topic) {Topic.create!(name: Faker::Hipster.sentence(3), description: Faker::Hipster.paragraph)}
-    let(:my_user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
-    let(:my_post) {my_topic.posts.create!(title: Faker::Hipster.sentence(3), body: Faker::Hipster.paragraph, user: my_user)}
+    let(:my_topic) { create(:topic) }
+    let(:my_user) { create(:user) }
+    let(:my_post) { create(:post, topic: my_topic, user: my_user) }
 
     context 'guest user' do
         describe 'POST create' do
-            it "redirects the user to the sign in view" do
-                post :create, params: {post_id: my_post.id}
+            it 'redirects the user to the sign in view' do
+                post :create, params: { post_id: my_post.id }
+
                 expect(response).to redirect_to(new_session_path)
             end
         end
@@ -29,19 +30,24 @@ RSpec.describe FavoritesController, type: :controller do
         end
 
         describe 'POST create' do
-            it "redirects to the postse show view" do
-                post :create, params: {post_id: my_post.id}
+            it 'redirects to the posts show view' do
+                post :create, params:{ post_id: my_post.id }
                 expect(response).to redirect_to([my_topic, my_post])
             end
 
-            it "creates a favorite for the current user and specified post" do
-                expect(my_user.favorites.find_by_post_id(my_post.id)).to be_nil
-                post :create, params: {post_id: my_post.id}
-                expect(response).to redirect_to([my_topic, my_post])
+            it 'creates a favorite for the current user and specified post' do
+                u =   create(:user)
+                expect(u.favorites.find_by_post_id(my_post.id)).to be_nil
+
+                post :create, params: { post_id: my_post.id }
+
+
+                expect(my_user.favorites.find_by_post_id(my_post.id)).not_to be_nil
             end
 
             it "creates a favorite for the current user and specified post" do
-                expect(my_user.favorites.find_by_post_id(my_post.id)).to be_nil
+                u =   create(:user)
+                expect(u.favorites.find_by_post_id(my_post.id)).to be_nil
                 post :create, params: {post_id: my_post.id}
                 expect(my_user.favorites.find_by_post_id(my_post.id)).not_to be_nil
             end
@@ -55,14 +61,16 @@ RSpec.describe FavoritesController, type: :controller do
             end
 
             it "destroys the favorite for the current user and post" do
+                u =   create(:user)
                 favorite = my_user.favorites.where(post: my_post).create
 
                 expect( my_user.favorites.find_by_post_id(my_post.id) ).not_to be_nil
 
                 delete :destroy, params: { post_id: my_post.id, id: favorite.id }
 
-                expect( my_user.favorites.find_by_post_id(my_post.id) ).to be_nil
-            end
+                count = Favorite.where({id: favorite.id}).size
+                expect(count).to eq 0
+                            end
         end
     end
 end

@@ -2,15 +2,16 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe CommentsController, type: :controller do
-    let(:name) {Faker::Hipster.sentence(3)}
-    let(:description) {Faker::Hipster.paragraph}
+# let(:name) {Faker::Hipster.sentence(3)}
+# let(:description) {Faker::Hipster.paragraph}
+
     let(:title) {Faker::Hipster.sentence(3)}
     let(:body) {Faker::Hipster.paragraph}
 
-    let(:my_user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
-    let(:other_user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
-    let(:my_topic) {Topic.create!(name: name, description: description)}
-    let(:my_post) {my_topic.posts.create!(title: title, body: body, user: my_user)}
+    let(:my_topic) { create(:topic) }
+    let(:my_user) { create(:user) }
+    let(:other_user) { create(:user) }
+    let(:my_post) { create(:post, topic: my_topic, user: my_user) }
     let(:my_comment){Comment.create!(body: body, post: my_post, user: my_user)}
 
     context "guest" do

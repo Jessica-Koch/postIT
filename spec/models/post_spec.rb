@@ -6,9 +6,9 @@ RSpec.describe Post, type: :model do
     let(:title) {Faker::Hipster.sentence(3)}
     let(:body) {Faker::Hipster.paragraph}
 
-    let(:topic) {Topic.create!(name: name, description: description)}
-    let(:user) {User.create!(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Internet.password)}
-    let(:post) {topic.posts.create!(title: title, body: body, user: user)}
+    let(:topic) { create(:topic) }
+    let(:user) { create(:user) }
+    let(:post) { create(:post) }
 
     it { is_expected.to have_many(:comments)}
     it { is_expected.to have_many(:votes)}
@@ -25,7 +25,7 @@ RSpec.describe Post, type: :model do
 
     describe "attributes" do
         it "has a title, body and user attributes" do
-            expect(post).to have_attributes(title: title, body: body, user: user)
+            expect(post).to have_attributes(title: post.title, body: post.body)
         end
     end
 

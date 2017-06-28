@@ -2,7 +2,7 @@ require 'rails_helper'
 include SessionsHelper
 
 RSpec.describe TopicsController, type: :controller do
-    let(:my_topic) { Topic.create!(name: Faker::Hipster.sentence(2),        description: Faker::Hipster.paragraph(3) )}
+    let(:my_topic) { create(:topic) }
 
     context "guest" do
         describe "GET index" do
@@ -241,7 +241,7 @@ RSpec.describe TopicsController, type: :controller do
                 expect(response).to redirect_to my_topic
             end
         end
-                describe "DELETE destroy" do
+        describe "DELETE destroy" do
             it "returns http redirect" do
                 delete :destroy, params: {id: my_topic.id}
                 expect(response).to redirect_to(topics_path)
